@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "proxyuser"
+    },
+    "sshKeyData": {
+      "value": "<GEN-SSH-KEY>"
+    },
+    "SubnetRefId": {
+      "value": "/subscriptions/xxxx-nnnnn-xxxxxx/resourceGroups/Group-AMS-VNET-190/providers/Microsoft.Network/virtualNetworks/VNET-PROD-190/subnets/Subnet-2"
+    },
+    "scriptsURL": {
+      "value": "https://<azstorageaccountname37>.blob.core.windows.net/haproxy/"
+    },
+    "lbDNSLabelPrefix": {
+      "value": "<NAME-HERE>"
+    }
+  }
+}
