@@ -97,7 +97,8 @@
     "appAvailabilitySetName": "appAvSet",
     "subnetRef": "[parameters('SubnetRefId')]",
     "lbName": "haproxyLB",
-    "lbVIPPort": 80,
+    "lbVIPPort": 443,
+    "lbVIPPort2": 7999,
     "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbName'))]",
     "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
     "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
@@ -188,7 +189,7 @@
         ],
         "loadBalancingRules": [
           {
-            "name": "LBRule",
+            "name": "LBRule1",
             "properties": {
               "frontendIPConfiguration": {
                 "id": "[variables('frontEndIPConfigID')]"
@@ -199,6 +200,25 @@
               "protocol": "Tcp",
               "frontendPort": "[variables('lbVIPPort')]",
               "backendPort": "[variables('lbVIPPort')]",
+              "enableFloatingIP": true,
+              "idleTimeoutInMinutes": 5,
+              "probe": {
+                "id": "[variables('lbProbeID')]"
+              }
+            }
+          },
+          {
+            "name": "LBRule2",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigID')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('lbPoolID')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": "[variables('lbVIPPort2')]",
+              "backendPort": "[variables('lbVIPPort2')]",
               "enableFloatingIP": true,
               "idleTimeoutInMinutes": 5,
               "probe": {
